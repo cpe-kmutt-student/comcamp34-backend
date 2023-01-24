@@ -1,4 +1,4 @@
-const controller = require("main.controller.js");
+const controller = require("./main.controller.js");
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -9,5 +9,5 @@ module.exports = function (app) {
         next();
     })
 
-    app.post ("/api/auth/signup", controller.test);
+    app.post ("/api/test", controller.test);
 }
