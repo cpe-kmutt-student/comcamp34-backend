@@ -11,7 +11,7 @@
  Target Server Version : 100421 (10.4.21-MariaDB)
  File Encoding         : 65001
 
- Date: 24/01/2023 21:23:02
+ Date: 25/01/2023 00:00:05
 */
 
 SET NAMES utf8mb4;
@@ -51,6 +51,7 @@ CREATE TABLE `question`  (
   `q8` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `q9` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `q10` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q11` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `question_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register_data` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -100,6 +101,7 @@ CREATE TABLE `register_data`  (
   `department_1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ภาควิชา/สาขา',
   `department_2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `department_3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `department_interest` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'หากน้อง ๆ มีความสนใจที่จะเข้าศึกษาต่อในภาควิชาวิศวกรรมคอมพิวเตอร์มจธ. น้อง ๆ จะเลือกเรียนหลักสูตรใด เพราะเหตุใด\r\n',
   `comcamp_pass` tinyint NULL DEFAULT NULL COMMENT 'เคยเข้าร่วมค่ายคอมแคมป์มาก่อนหรือไม่ (ติ๊กเลือก)',
   `camp_1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ชื่อค่าย | ไม่มี \"-\"',
   `camp_2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
