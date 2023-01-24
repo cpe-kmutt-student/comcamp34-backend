@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model file {
+  id                  Int            @id
+  user_id             Int?
+  agreement           String?        @db.VarChar(255)
+  card                String?        @db.VarChar(255)
+  student_certificate String?        @db.VarChar(255)
+  gpax_paper          String?        @db.VarChar(255)
+  parent_card         String?        @db.VarChar(255)
+  register_data       register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}
+
+model question {
+  id            Int            @id
+  user_id       Int?
+  q1            String?        @db.VarChar(255)
+  q2            String?        @db.VarChar(255)
+  q3            String?        @db.VarChar(255)
+  q4            String?        @db.VarChar(255)
+  q5            String?        @db.VarChar(255)
+  q6            String?        @db.VarChar(255)
+  q7            String?        @db.VarChar(255)
+  q8            String?        @db.VarChar(255)
+  q9            String?        @db.VarChar(255)
+  q10           String?        @db.VarChar(255)
+  register_data register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}
+
+model register_data {
+  id                Int        @id @default(autoincrement())
+  google_token      String?    @db.VarChar(255)
+  pname             String?    @db.VarChar(50)
+  fname             String?    @db.VarChar(50)
+  mname             String?    @db.VarChar(50)
+  sname             String?    @db.VarChar(50)
+  nickname          String?    @db.VarChar(50)
+  dob               DateTime?  @db.Date
+  mobile            String?    @db.VarChar(20)
+  email             String?    @db.VarChar(50)
+  province          String?    @db.VarChar(255)
+  travelby          String?    @db.VarChar(255)
+  shirt_size        String?    @db.VarChar(10)
+  notebook          Int?       @db.TinyInt
+  allergic_food     String?    @db.VarChar(255)
+  special           String?    @db.VarChar(255)
+  underlying        String?    @db.VarChar(255)
+  medicine          String?    @db.VarChar(255)
+  allergic_medicine String?    @db.VarChar(255)
+  parent_pname      String?    @db.VarChar(50)
+  parent_fname      String?    @db.VarChar(50)
+  parent_mname      String?    @db.VarChar(50)
+  parent_sname      String?    @db.VarChar(50)
+  parent_mobile     String?    @db.VarChar(20)
+  parent_email      String?    @db.VarChar(48)
+  school_name       String?    @db.VarChar(255)
+  school_province   String?    @db.VarChar(255)
+  study_plan        String?    @db.VarChar(255)
+  student_level     String?    @db.VarChar(255)
+  gpax              String?    @db.VarChar(255)
+  university_1      String?    @db.VarChar(255)
+  university_2      String?    @db.VarChar(255)
+  university_3      String?    @db.VarChar(255)
+  faculty_1         String?    @db.VarChar(255)
+  faculty_2         String?    @db.VarChar(255)
+  faculty_3         String?    @db.VarChar(255)
+  department_1      String?    @db.VarChar(255)
+  department_2      String?    @db.VarChar(255)
+  department_3      String?    @db.VarChar(255)
+  comcamp_pass      Int?       @db.TinyInt
+  camp_1            String?    @db.VarChar(255)
+  camp_2            String?    @db.VarChar(255)
+  university_made_1 String?    @db.VarChar(255)
+  university_made_2 String?    @db.VarChar(255)
+  file              file[]
+  question          question[]
+}

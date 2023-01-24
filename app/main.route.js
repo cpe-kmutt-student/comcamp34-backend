@@ -10,4 +10,5 @@ module.exports = function (app) {
     })
 
     app.post ("/api/test", controller.test);
+    app.post ("/api/prismatest", controller.prismatest);
 }
