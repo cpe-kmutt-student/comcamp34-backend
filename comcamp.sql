@@ -11,7 +11,7 @@
  Target Server Version : 100421 (10.4.21-MariaDB)
  File Encoding         : 65001
 
- Date: 24/01/2023 20:54:07
+ Date: 24/01/2023 21:23:02
 */
 
 SET NAMES utf8mb4;
@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `file`;
 CREATE TABLE `file`  (
   `id` int NOT NULL,
   `user_id` int NULL DEFAULT NULL,
-  `agreement` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'หนังสือขออนุญาตผู้ปกครอง',
-  `card` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'สำเนาบัตรประจำตัวประชาชนหรือสำเนาบัตรนักเรียนของผู้สมัคร',
-  `student_certificate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'เอกสารรับรองความเป็นนักเรียนหรือเอกสารรับรองผลการศึกษา (ปพ.7)',
-  `gpax_paper` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ระเบียนแสดงผลการศึกษาของระดับชั้นมัธยมศึกษาตอนปลาย (ปพ.1) หรือหนังสือแสดงผลการเรียนภาคการศึกษาล่าสุด',
-  `parent_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'สำเนาบัตรประจำตัวประชาชนของผู้ปกครองที่ให้การรับรองในหนังสือขออนุญาตผู้ปกครอง',
+  `agreement` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'หนังสือขออนุญาตผู้ปกครอง',
+  `card` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'สำเนาบัตรประจำตัวประชาชนหรือสำเนาบัตรนักเรียนของผู้สมัคร',
+  `student_certificate` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'เอกสารรับรองความเป็นนักเรียนหรือเอกสารรับรองผลการศึกษา (ปพ.7)',
+  `gpax_paper` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'ระเบียนแสดงผลการศึกษาของระดับชั้นมัธยมศึกษาตอนปลาย (ปพ.1) หรือหนังสือแสดงผลการเรียนภาคการศึกษาล่าสุด',
+  `parent_card` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'สำเนาบัตรประจำตัวประชาชนของผู้ปกครองที่ให้การรับรองในหนังสือขออนุญาตผู้ปกครอง',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `file_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register_data` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -41,16 +41,16 @@ DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question`  (
   `id` int NOT NULL,
   `user_id` int NULL DEFAULT NULL,
-  `q1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q6` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q7` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q8` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q9` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `q10` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `q1` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q2` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q3` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q4` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q5` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q6` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q7` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q8` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q9` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `q10` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `question_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register_data` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -90,7 +90,7 @@ CREATE TABLE `register_data`  (
   `school_province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'จังหวัด',
   `study_plan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'แผนการเรียน',
   `student_level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ระดับการศึกษา (ปีการศึกษา 2565)',
-  `gpax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'เกรดเฉลี่ย',
+  `gpax` float NULL DEFAULT NULL COMMENT 'เกรดเฉลี่ย',
   `university_1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'มหาวิทยาลัย ',
   `university_2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `university_3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,

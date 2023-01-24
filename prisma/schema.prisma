@@ -10,11 +10,11 @@ datasource db {
 model file {
   id                  Int            @id
   user_id             Int?
-  agreement           String?        @db.VarChar(255)
-  card                String?        @db.VarChar(255)
-  student_certificate String?        @db.VarChar(255)
-  gpax_paper          String?        @db.VarChar(255)
-  parent_card         String?        @db.VarChar(255)
+  agreement           String?        @db.Text
+  card                String?        @db.Text
+  student_certificate String?        @db.Text
+  gpax_paper          String?        @db.Text
+  parent_card         String?        @db.Text
   register_data       register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
   @@index([user_id], map: "user_id")
@@ -23,16 +23,16 @@ model file {
 model question {
   id            Int            @id
   user_id       Int?
-  q1            String?        @db.VarChar(255)
-  q2            String?        @db.VarChar(255)
-  q3            String?        @db.VarChar(255)
-  q4            String?        @db.VarChar(255)
-  q5            String?        @db.VarChar(255)
-  q6            String?        @db.VarChar(255)
-  q7            String?        @db.VarChar(255)
-  q8            String?        @db.VarChar(255)
-  q9            String?        @db.VarChar(255)
-  q10           String?        @db.VarChar(255)
+  q1            String?        @db.Text
+  q2            String?        @db.Text
+  q3            String?        @db.Text
+  q4            String?        @db.Text
+  q5            String?        @db.Text
+  q6            String?        @db.Text
+  q7            String?        @db.Text
+  q8            String?        @db.Text
+  q9            String?        @db.Text
+  q10           String?        @db.Text
   register_data register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
 
   @@index([user_id], map: "user_id")
@@ -68,7 +68,7 @@ model register_data {
   school_province   String?    @db.VarChar(255)
   study_plan        String?    @db.VarChar(255)
   student_level     String?    @db.VarChar(255)
-  gpax              String?    @db.VarChar(255)
+  gpax              Float?     @db.Float
   university_1      String?    @db.VarChar(255)
   university_2      String?    @db.VarChar(255)
   university_3      String?    @db.VarChar(255)
