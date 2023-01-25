@@ -1,0 +1,37 @@
+version: "3"
+services:
+  comcamp-backend:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    ports:
+      - "8000:8080"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    command: node server.js
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: comcamp
+      MYSQL_ROOT_PASSWORD: "comcampAdminPassword"
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "7000:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: "root"
+      PMA_PASSWORD: "comcampAdminPassword"
+    depends_on:
+      - mysql
