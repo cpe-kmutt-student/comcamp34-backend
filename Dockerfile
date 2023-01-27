@@ -12,4 +12,4 @@ RUN npx prisma generate
 EXPOSE $PORT
 RUN chown -R node /usr/src/app
 USER node
-CMD ["npm", "run","start"]
+CMD ["node","server.js"]

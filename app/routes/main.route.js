@@ -1,4 +1,4 @@
-const controller = require("./main.controller.js");
+const controller = require("../controller/main.controller.js");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -11,6 +11,6 @@ module.exports = function (app) {
 
   app.post("/api/test", controller.test);
   app.post("/api/hello", controller.hello);
-  app.post("/api/prismatest", controller.prismatest);
+  app.post("/api/testprisma", controller.prismatest);
   app.post("/api/createprisma", controller.createprisma);
 };

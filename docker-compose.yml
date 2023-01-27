@@ -12,6 +12,7 @@ services:
     env_file:
       - .env
     command: node server.js
+    restart: on-failure
     depends_on:
       - mysql
 

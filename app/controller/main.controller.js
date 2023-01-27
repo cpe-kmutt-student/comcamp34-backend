@@ -1,4 +1,4 @@
-const sql = require("./connect.js");
+const sql = require("../connect.js");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -16,41 +16,33 @@ exports.test = (req, res) => {
   );
 };
 
-exports.prismatest = (req, res) => {
-  prisma.register_data
-    .findMany({
+exports.prismatest = async (req, res) => {
+  try {
+    const result = await prisma.register_data.findMany({
       include: {
         file: true,
         question: true,
       },
-    })
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: err });
-      return;
     });
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
 };
 
-exports.createprisma = (req, res) => {
-  const { firstName, lastName } = req.body;
-  prisma.register_data
-    .create({
+exports.createprisma = async (req, res) => {
+  try {
+    const { firstName, lastName } = req.body;
+    const result = prisma.register_data.create({
       data: {
         fname: firstName,
         sname: lastName,
       },
-    })
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({ message: err });
-      return;
     });
+    res.send(result);
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
 };
 
 exports.hello = (req, res) => {
