@@ -42,12 +42,12 @@ model question {
 model register_data {
   id                  Int        @id @default(autoincrement())
   google_token        String?    @db.VarChar(255)
-  pname               String?    @db.VarChar(50)
-  fname               String?    @db.VarChar(50)
-  mname               String?    @db.VarChar(50)
-  sname               String?    @db.VarChar(50)
+  prefix              String?    @db.VarChar(50)
+  fullname            String?    @db.VarChar(50)
+  middlename          String?    @db.VarChar(50)
+  surname             String?    @db.VarChar(50)
   nickname            String?    @db.VarChar(50)
-  dob                 DateTime?  @db.Date
+  birth_date          DateTime?  @db.Date
   mobile              String?    @db.VarChar(20)
   email               String?    @db.VarChar(50)
   province            String?    @db.VarChar(255)
