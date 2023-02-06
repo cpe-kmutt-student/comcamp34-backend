@@ -1,6 +1,6 @@
 const sql = require("../connect.js");
 const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ["query", "info", "warn", "error"] });
 
 exports.test = (req, res) => {
   sql.query(
@@ -18,12 +18,14 @@ exports.test = (req, res) => {
 
 exports.prismatest = async (req, res) => {
   try {
+    console.log("Running");
     const result = await prisma.register_data.findMany({
       include: {
         file: true,
         question: true,
       },
     });
+    console.log(result);
     res.status(200).send(result);
   } catch (err) {
     res.status(500).send({ message: err });
@@ -35,8 +37,8 @@ exports.createprisma = async (req, res) => {
     const { firstName, lastName } = req.body;
     const result = prisma.register_data.create({
       data: {
-        fname: firstName,
-        sname: lastName,
+        fullname: firstName,
+        surname: lastName,
       },
     });
     res.send(result);
