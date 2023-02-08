@@ -13,7 +13,7 @@ model file {
   card                String?        @db.Text
   student_certificate String?        @db.Text
   gpax_paper          String?        @db.Text
-  parent_card         String?        @db.Text
+  image               String?        @db.Text
   register_data       register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
   @@index([uid], map: "uid")
