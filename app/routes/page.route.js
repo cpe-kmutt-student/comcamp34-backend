@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const pageController = require("../controller/page.controller");
+const fileController = require("../controller/file.controller");
+const questionController = require("../controller/question.controller");
 
 router.route("/pages").post(pageController.testPage);
 
@@ -31,19 +33,19 @@ router
 // UploadFile
 router
   .route("/pages/5")
-  .post(pageController.updateUploadFile)
-  .get(pageController.getUploadFile);
+  .post(fileController.updateUploadFile)
+  .get(fileController.getUploadFile);
 
 // Question1
 router
   .route("/pages/6")
-  .post(pageController.updateQuestion1)
-  .get(pageController.getQuestion1);
+  .post(questionController.updateQuestion1)
+  .get(questionController.getQuestion1);
   
 // Question2
 router
   .route("/pages/7")
-  .post(pageController.updateQuestion2)
-  .get(pageController.getQuestion2);
+  .post(questionController.updateQuestion2)
+  .get(questionController.getQuestion2);
 
 module.exports = router;

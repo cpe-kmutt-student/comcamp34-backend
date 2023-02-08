@@ -74,6 +74,7 @@ exports.updateEducation = async (uid, body) => {
         major_3: body.major_3
       }
     });
+    return result;
 };
 
 exports.getEducation = async (uid, body) => {
@@ -117,16 +118,32 @@ exports.updateInterest = async (uid, body) => {
       no_previous_camp: body.no_previous_camp
     }
   });
-  
   return result;
 };
 
-exports.getInterest = async (uid, body) => {};
+exports.getInterest = async (uid, body) => {
+  const result = await User.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      status: true,
+      course: true,
+      a: true,
+      camp1: true,
+      by1: true,
+      camp2: true,
+      by2: true,
+      no_previous_camp: true,
+    }
+  });
+  return result;
+};
 
 exports.updateParentData = async (uid, body) => {
     const result = await User.update({
       where:{
-        uid:uid
+        uid: uid
       },
       data:{
         parent_prefix: body.parent_prefix,
@@ -149,4 +166,28 @@ exports.updateParentData = async (uid, body) => {
   return result;
 };
 
-exports.getParentData = async (uid, body) => {};
+exports.getParentData = async (uid, body) => {
+  const result = await User.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      parent_prefix: true,
+        parent_firstname: true,
+        parent_middlename: true,
+        parent_surname: true,
+        parent_relation: true,
+        parent_mobile: true,
+        parent_email: true,
+        same_parent: true,
+        emergency_prefix: true,
+        emergency_firstname: true,
+        emergency_middlename: true,
+        emergency_surname: true,
+        emergency_relation: true,
+        emergency_mobile: true,
+        emergency_email: true,
+    }
+  });
+  return result;
+};
