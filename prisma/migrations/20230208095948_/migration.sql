@@ -1,21 +1,19 @@
 -- CreateTable
 CREATE TABLE `file` (
-    `id` INTEGER NOT NULL,
-    `user_id` INTEGER NULL,
+    `uid` VARCHAR(255) NOT NULL,
     `agreement` TEXT NULL,
     `card` TEXT NULL,
     `student_certificate` TEXT NULL,
     `gpax_paper` TEXT NULL,
     `parent_card` TEXT NULL,
 
-    INDEX `user_id`(`user_id`),
-    PRIMARY KEY (`id`)
+    UNIQUE INDEX `file_uid_key`(`uid`),
+    INDEX `uid`(`uid`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `question` (
-    `id` INTEGER NOT NULL,
-    `user_id` INTEGER NULL,
+    `uid` VARCHAR(255) NOT NULL,
     `q1` TEXT NULL,
     `q2` TEXT NULL,
     `q3` TEXT NULL,
@@ -28,14 +26,14 @@ CREATE TABLE `question` (
     `q10` TEXT NULL,
     `q11` TEXT NULL,
 
-    INDEX `user_id`(`user_id`),
-    PRIMARY KEY (`id`)
+    UNIQUE INDEX `question_uid_key`(`uid`),
+    INDEX `uid`(`uid`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `register_data` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `google_uid` VARCHAR(255) NULL,
+    `uid` VARCHAR(255) NULL,
     `prefix` VARCHAR(50) NULL,
     `firstname` VARCHAR(50) NULL,
     `middlename` VARCHAR(50) NULL,
@@ -87,12 +85,15 @@ CREATE TABLE `register_data` (
     `camp_2` VARCHAR(255) NULL,
     `university_made_1` VARCHAR(255) NULL,
     `university_made_2` VARCHAR(255) NULL,
+    `is_completed` BOOLEAN NULL DEFAULT false,
+    `submited_at` DATETIME(3) NULL,
 
+    UNIQUE INDEX `register_data_uid_key`(`uid`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `file` ADD CONSTRAINT `file_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register_data`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `file` ADD CONSTRAINT `file_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `register_data`(`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `question` ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register_data`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `question` ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `register_data`(`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT;

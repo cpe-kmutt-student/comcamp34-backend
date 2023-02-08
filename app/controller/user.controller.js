@@ -1,59 +1,41 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const userService = require("../services/user.service");
 
-exports.getAllUser = async (req, res) => {
-  try {
-    const result = await prisma.register_data.findMany({});
-    res.status(200).send(result);
-  } catch (err) {
-    res.status(500).send({ status: false, message: err });
-  }
-};
-
+/// validate submit login/submit
 exports.createUser = async (req, res) => {
   try {
-    const body = req.body;
-    const result = await prisma.register_data.create({
-      data: {
-        pname: body.pname,
-        fname: body.fname,
-        sname: body.sname,
-      },
-    });
-    res.status(201).send(result);
+    const uid = req.params.uid;
+    const user = await userService.getUserByUid(uid);
+    console.log("USER", user);
+
+    // Create User
+    if (!user) {
+      const token = userService.generateToken(uid);
+      await userService.createUser(uid);
+      res
+        .status(201)
+        .send({ success: true, message: "Created User", accessToken: token });
+    }
+    if (user) {
+      // Check Form Submitted
+      if (user.is_completed == true) {
+        res
+          .status(401)
+          .send({ success: false, message: "User Already Submitted Form" });
+      } else {
+        const token = userService.generateToken(uid);
+        res.status(200).send({
+          success: true,
+          message: "Authenthicated",
+          accessToken: token,
+        });
+      }
+    }
   } catch (err) {
-    res.status(500).send({ status: false, message: err });
+    // console.log(err);
+    res.status(500).send({ success: false, message: err });
   }
 };
 
-exports.updateUser = async (req, res) => {
-  try {
-    const body = req.body;
-    const result = await prisma.register_data.update({
-      where: {
-        email: req.params.email,
-      },
-      data: {
-        pname: body.pname,
-        fname: body.fname,
-        sname: body.sname,
-      },
-    });
-    res.status(201).send({ status: "success", result: result });
-  } catch (err) {
-    res.status(500).send({ status: false, message: err });
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    const result = await prisma.register_data.delete({
-      where: {
-        email: req.params.email,
-      },
-    });
-    res.status(200).send({ status: "success" });
-  } catch (err) {
-    res.status(500).send({ status: false, message: err });
-  }
+exports.test = (req, res) => {
+  res.status(200).send("Test Success");
 };

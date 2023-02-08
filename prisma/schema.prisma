@@ -8,21 +8,19 @@ datasource db {
 }
 
 model file {
-  id                  Int            @id
-  user_id             Int?
+  uid                 String         @unique @db.VarChar(255)
   agreement           String?        @db.Text
   card                String?        @db.Text
   student_certificate String?        @db.Text
   gpax_paper          String?        @db.Text
   parent_card         String?        @db.Text
-  register_data       register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
+  register_data       register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
-  @@index([user_id], map: "user_id")
+  @@index([uid], map: "uid")
 }
 
 model question {
-  id            Int            @id
-  user_id       Int?
+  uid           String         @unique @db.VarChar(255)
   q1            String?        @db.Text
   q2            String?        @db.Text
   q3            String?        @db.Text
@@ -34,14 +32,14 @@ model question {
   q9            String?        @db.Text
   q10           String?        @db.Text
   q11           String?        @db.Text
-  register_data register_data? @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
+  register_data register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
 
-  @@index([user_id], map: "user_id")
+  @@index([uid], map: "uid")
 }
 
 model register_data {
-  id                   Int        @id @default(autoincrement())  
-  google_uid           String?    @db.VarChar(255)
+  id                   Int        @id @default(autoincrement())
+  uid                  String?    @unique @db.VarChar(255)
   prefix               String?    @db.VarChar(50)
   firstname            String?    @db.VarChar(50)
   middlename           String?    @db.VarChar(50)
@@ -93,6 +91,8 @@ model register_data {
   camp_2               String?    @db.VarChar(255)
   university_made_1    String?    @db.VarChar(255)
   university_made_2    String?    @db.VarChar(255)
+  is_completed         Boolean?   @default(false)
+  submited_at          DateTime?
   file                 file[]
   question             question[]
 }
