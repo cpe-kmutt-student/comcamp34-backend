@@ -8,13 +8,13 @@ datasource db {
 }
 
 model file {
-  uid                 String         @unique @db.VarChar(255)
-  agreement           String?        @db.Text
-  card                String?        @db.Text
-  student_certificate String?        @db.Text
-  gpax_paper          String?        @db.Text
-  image               String?        @db.Text
-  register_data       register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
+  uid           String         @unique @db.VarChar(255)
+  image_URL     String?        @db.Text
+  agreement_URL String?        @db.Text
+  card_URL      String?        @db.Text
+  pp7_URL       String?        @db.Text
+  pp1_URL       String?        @db.Text
+  register_data register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
   @@index([uid], map: "uid")
 }
@@ -27,72 +27,74 @@ model question {
   q4            String?        @db.Text
   q5            String?        @db.Text
   q6            String?        @db.Text
-  q7            String?        @db.Text
-  q8            String?        @db.Text
-  q9            String?        @db.Text
-  q10           String?        @db.Text
-  q11           String?        @db.Text
   register_data register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
 
   @@index([uid], map: "uid")
 }
 
 model register_data {
-  id                   Int        @id @default(autoincrement())
-  uid                  String?    @unique @db.VarChar(255)
-  prefix               String?    @db.VarChar(50)
-  firstname            String?    @db.VarChar(50)
-  middlename           String?    @db.VarChar(50)
-  surname              String?    @db.VarChar(50)
-  nickname             String?    @db.VarChar(50)
-  birth_date           DateTime?  @db.Date
-  mobile               String?    @db.VarChar(20)
-  email                String?    @db.VarChar(50)
-  province             String?    @db.VarChar(255)
-  travelby             String?    @db.VarChar(255)
-  shirt_size           String?    @db.VarChar(10)
-  notebook             Int?       @db.TinyInt
-  allergic_food        String?    @db.VarChar(255)
-  special              String?    @db.VarChar(255)
-  underlying           String?    @db.VarChar(255)
-  medicine             String?    @db.VarChar(255)
-  allergic_medicine    String?    @db.VarChar(255)
-  parent_prefix        String?    @db.VarChar(50)
-  parent_firstname     String?    @db.VarChar(50)
-  parent_middlename    String?    @db.VarChar(50)
-  parent_surname       String?    @db.VarChar(50)
-  parent_relation      String?    @db.VarChar(50)
-  parent_mobile        String?    @db.VarChar(20)
-  parent_email         String?    @db.VarChar(48)
-  emergency_prefix     String?    @db.VarChar(50)
-  emergency_firstname  String?    @db.VarChar(50)
-  emergency_middlename String?    @db.VarChar(50)
-  emergency_surname    String?    @db.VarChar(50)
-  emergency_relation   String?    @db.VarChar(50)
-  emergency_mobile     String?    @db.VarChar(20)
-  emergency_email      String?    @db.VarChar(48)
-  school_name          String?    @db.VarChar(255)
-  school_province      String?    @db.VarChar(255)
-  study_plan           String?    @db.VarChar(255)
-  student_level        String?    @db.VarChar(255)
-  gpax                 Float?     @db.Float
-  university_1         String?    @db.VarChar(255)
-  university_2         String?    @db.VarChar(255)
-  university_3         String?    @db.VarChar(255)
-  faculty_1            String?    @db.VarChar(255)
-  faculty_2            String?    @db.VarChar(255)
-  faculty_3            String?    @db.VarChar(255)
-  department_1         String?    @db.VarChar(255)
-  department_2         String?    @db.VarChar(255)
-  department_3         String?    @db.VarChar(255)
-  department_interest  String?    @db.VarChar(255)
-  comcamp_pass         Int?       @db.TinyInt
-  camp_1               String?    @db.VarChar(255)
-  camp_2               String?    @db.VarChar(255)
-  university_made_1    String?    @db.VarChar(255)
-  university_made_2    String?    @db.VarChar(255)
-  is_completed         Boolean?   @default(false)
-  submited_at          DateTime?
-  file                 file[]
-  question             question[]
+  // -------- Personal --------
+  id                    Int        @id @default(autoincrement())
+  uid                   String?    @unique @db.VarChar(255)
+  prefix                String?    @db.VarChar(50)
+  firstname             String?    @db.VarChar(50)
+  middlename            String?    @db.VarChar(50)
+  surname               String?    @db.VarChar(50)
+  nickname              String?    @db.VarChar(50)
+  birth_date            DateTime?  @db.Date
+  mobile                String?    @db.VarChar(20)
+  email                 String?    @db.VarChar(50)
+  province              String?    @db.VarChar(255)
+  travelby              String?    @db.VarChar(255)
+  shirt_size            String?    @db.VarChar(10)
+  medicine              String?    @db.VarChar(255)
+  underlying            String?    @db.VarChar(255)
+  allergic_food         String?    @db.VarChar(255)
+  allergic_medicine     String?    @db.VarChar(255)
+  special               String?    @db.VarChar(255)
+  notebook              Boolean?
+  // -------- Education --------
+  school_name           String?    @db.VarChar(255)
+  school_province       String?    @db.VarChar(255)
+  study_plan            String?    @db.VarChar(255)
+  student_level         String?    @db.VarChar(255)
+  gpax                  Float?     @db.Float
+  university_1          String?    @db.VarChar(255)
+  faculty_1             String?    @db.VarChar(255)
+  major_1               String?    @db.VarChar(255)
+  university_2          String?    @db.VarChar(255)
+  faculty_2             String?    @db.VarChar(255)
+  major_2               String?    @db.VarChar(255)
+  university_3          String?    @db.VarChar(255)
+  faculty_3             String?    @db.VarChar(255)
+  major_3               String?    @db.VarChar(255)
+  // -------- Interest --------
+  comcamp_previous      Boolean?   @default(false)
+  major_interest        String?    @db.VarChar(255)
+  reason_major_interest String?    @db.VarChar(255)
+  camp_1                String?    @db.VarChar(255)
+  camp_2                String?    @db.VarChar(255)
+  camp1_by              String?    @db.VarChar(255)
+  camp2_by              String?    @db.VarChar(255)
+  no_previous_camp      Boolean?   @default(false)
+  // -------- ParentData --------
+  parent_prefix         String?    @db.VarChar(50)
+  parent_firstname      String?    @db.VarChar(50)
+  parent_middlename     String?    @db.VarChar(50)
+  parent_surname        String?    @db.VarChar(50)
+  parent_relation       String?    @db.VarChar(50)
+  parent_mobile         String?    @db.VarChar(20)
+  parent_email          String?    @db.VarChar(48)
+  same_parent           Boolean?   @default(false)
+  emergency_prefix      String?    @db.VarChar(50)
+  emergency_firstname   String?    @db.VarChar(50)
+  emergency_middlename  String?    @db.VarChar(50)
+  emergency_surname     String?    @db.VarChar(50)
+  emergency_relation    String?    @db.VarChar(50)
+  emergency_mobile      String?    @db.VarChar(20)
+  emergency_email       String?    @db.VarChar(48)
+  is_completed          Boolean?   @default(false)
+  submited_at           DateTime?
+  file                  file[]
+  question              question[]
 }

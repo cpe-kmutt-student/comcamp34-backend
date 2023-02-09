@@ -16,8 +16,7 @@ exports.updateQuestion1 = async (req, res) => {
 exports.getQuestion1 = async (req, res) => {
   try {
     const uid = req.uid;
-    const body = req.body;
-    const result = await questionService.getQuestion1(uid, body);
+    const result = await questionService.getQuestion1(uid);
     res.status(200).send({ success: true, data: result });
   } catch (error) {
     res.status(500).send({ success: false });
@@ -38,8 +37,7 @@ exports.updateQuestion2 = async (req, res) => {
 exports.getQuestion2 = async (req, res) => {
   try {
     const uid = req.uid;
-    const body = req.body;
-    const result = await questionService.getQuestion2(uid, body);
+    const result = await questionService.getQuestion2(uid);
     res.status(200).send({ success: true, data: result });
   } catch (error) {
     res.status(500).send({ success: false });

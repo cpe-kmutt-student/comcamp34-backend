@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient({ log: ["query", "info", "warn", "error"] });
+const prisma = new PrismaClient();
 const File = prisma.file;
 
 exports.updateUploadFile = async (uid, body) => {
@@ -18,8 +18,8 @@ exports.updateUploadFile = async (uid, body) => {
   return result;
 };
 
-exports.getUploadFile = async (uid, body) => {
-  const result = await Fire.findUnique({
+exports.getUploadFile = async (uid) => {
+  const result = await File.findUnique({
     where: {
       uid: uid,
     },

@@ -5,7 +5,6 @@ exports.createUser = async (req, res) => {
   try {
     const uid = req.params.uid;
     const user = await userService.getUserByUid(uid);
-    console.log("USER", user);
 
     // Create User
     if (!user) {
@@ -36,6 +35,3 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.test = (req, res) => {
-  res.status(200).send("Test Success");
-};
