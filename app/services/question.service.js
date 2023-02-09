@@ -39,6 +39,7 @@ exports.updateQuestion2 = async (uid, body) => {
       q4: body.q4,
       q5: body.q5,
       q6: body.q6,
+      q7: body.q7,
     },
   });
   return result;
@@ -53,6 +54,7 @@ exports.getQuestion2 = async (uid) => {
       q4: true,
       q5: true,
       q6: true,
+      q7: true,
     },
   });
   return result;

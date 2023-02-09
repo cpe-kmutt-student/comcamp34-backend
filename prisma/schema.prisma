@@ -27,6 +27,7 @@ model question {
   q4            String?        @db.Text
   q5            String?        @db.Text
   q6            String?        @db.Text
+  q7            String?        @db.Text
   register_data register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "question_ibfk_1")
 
   @@index([uid], map: "uid")
