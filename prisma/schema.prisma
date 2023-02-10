@@ -59,7 +59,7 @@ model register_data {
   school_province       String?    @db.VarChar(255)
   study_plan            String?    @db.VarChar(255)
   student_level         String?    @db.VarChar(255)
-  gpax                  Float?     @db.Float
+  gpax                  String?    @db.VarChar(10)
   university_1          String?    @db.VarChar(255)
   faculty_1             String?    @db.VarChar(255)
   major_1               String?    @db.VarChar(255)

@@ -8,7 +8,7 @@ ARG NODE_ENV
 COPY . .
 RUN npm install
 ENV PORT=8080
-RUN npx prisma migrate deploy
+RUN npx prisma generate
 EXPOSE $PORT
 RUN chown -R node /usr/src/app
 USER node
