@@ -5,7 +5,25 @@ exports.testPage = (req, res) => {
   // console.log(id);
   res.status(200).send("test Pages");
 };
-
+exports.updateConsent = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await pageService.updateConsent(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+exports.getConsent = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await pageService.getConsent(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    res.status(500).send({ success: false });
+  }
+};
 exports.updatePersonal = async (req, res) => {
   try {
     const uid = req.uid;

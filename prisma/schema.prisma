@@ -37,6 +37,7 @@ model register_data {
   // -------- Personal --------
   id                    Int        @id @default(autoincrement())
   uid                   String?    @unique @db.VarChar(255)
+  consent               Boolean    @default(false)
   prefix                String?    @db.VarChar(50)
   firstname             String?    @db.VarChar(50)
   middlename            String?    @db.VarChar(50)

@@ -6,6 +6,12 @@ const questionController = require("../controller/question.controller");
 
 router.route("/pages").post(pageController.testPage);
 
+// Consent
+router
+  .route("/pages/0")
+  .post(pageController.updateConsent)
+  .get(pageController.getConsent);
+
 // PersonalInfo
 router
   .route("/pages/1")
@@ -41,7 +47,7 @@ router
   .route("/pages/6")
   .post(questionController.updateQuestion1)
   .get(questionController.getQuestion1);
-  
+
 // Question2
 router
   .route("/pages/7")

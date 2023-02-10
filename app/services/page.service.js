@@ -2,6 +2,32 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const User = prisma.register_data;
 
+exports.updateConsent = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const result = await User.update({
+    where: {
+      uid: uid,
+    },
+    data: {
+      consent: true,
+    },
+  });
+  return result;
+};
+
+exports.getConsent = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const result = await User.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      consent: true,
+    },
+  });
+  return result;
+};
+
 exports.updatePersonal = async (uid, body) => {
   if (!uid) throw new Error("No Uid Provide");
   const result = await User.update({
