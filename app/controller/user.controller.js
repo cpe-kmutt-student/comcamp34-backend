@@ -22,9 +22,11 @@ exports.createUser = async (req, res) => {
           .send({ success: false, message: "User Already Submitted Form" });
       } else {
         const token = userService.generateToken(uid);
+        const page = await userService.getPage(uid);
         res.status(200).send({
           success: true,
           message: "Authenthicated",
+          page: page,
           accessToken: token,
         });
       }

@@ -31,6 +31,7 @@ exports.updatePersonal = async (req, res) => {
     const result = await pageService.updatePersonal(uid, body);
     res.status(200).send({ success: true, data: result });
   } catch (error) {
+    console.log(error);
     res.status(500).send({ success: false });
   }
 };
@@ -103,6 +104,16 @@ exports.getParentData = async (req, res) => {
   try {
     const uid = req.uid;
     const result = await pageService.getParentData(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.submit = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await pageService.updateSubmit(uid);
     res.status(200).send({ success: true, data: result });
   } catch (error) {
     res.status(500).send({ success: false });

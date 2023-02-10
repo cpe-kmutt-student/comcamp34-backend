@@ -33,6 +33,19 @@ exports.createUser = async (uid) => {
   return result;
 };
 
+exports.getPage = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const result = await User.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      page: true,
+    },
+  });
+  return result.page;
+};
+
 exports.generateToken = (uid) => {
   const secret = process.env.JWT_SECRET;
   const token = jwt.sign({ uid: uid }, secret, {

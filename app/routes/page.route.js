@@ -54,4 +54,7 @@ router
   .post(questionController.updateQuestion2)
   .get(questionController.getQuestion2);
 
+// Submit
+router.route("/pages/submit").post(pageController.submit);
+
 module.exports = router;

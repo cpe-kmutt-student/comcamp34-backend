@@ -1,8 +1,25 @@
+const userService = require("../services/user.service");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const Question = prisma.question;
+const User = prisma.register_data;
 
+const checkPage = async (uid, bodyPage) => {
+  const page = await userService.getPage(uid);
+  let currentPage = page;
+  if (bodyPage > page) {
+    currentPage = bodyPage;
+  }
+  return currentPage;
+};
 exports.updateQuestion1 = async (uid, body) => {
+  const currentPage = await checkPage(uid, 7);
+  await User.update({
+    where: {
+      uid: uid,
+    },
+    data: { page: currentPage },
+  });
   const result = await Question.update({
     where: {
       uid: uid,
