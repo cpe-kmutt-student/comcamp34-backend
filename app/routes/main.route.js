@@ -8,9 +8,5 @@ module.exports = function (app) {
     );
     next();
   });
-
-  app.post("/api/test", controller.test);
   app.post("/api/hello", controller.hello);
-  app.post("/api/testprisma", controller.prismatest);
-  app.post("/api/createprisma", controller.createprisma);
 };

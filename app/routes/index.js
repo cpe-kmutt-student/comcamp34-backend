@@ -6,6 +6,5 @@ const router = require("express").Router();
 const api = process.env.apiVersion || "/api";
 router.use(`${api}`, require("./user.route"));
 router.use(`${api}`, authJwt.verifyToken, require("./page.route"));
-// router.use(`${api}`, require("./question.route"));
 
 module.exports = router;
