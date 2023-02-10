@@ -1,5 +1,3 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
 const questionService = require("../services/question.service");
 
 exports.updateQuestion1 = async (req, res) => {

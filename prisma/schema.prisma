@@ -8,13 +8,18 @@ datasource db {
 }
 
 model file {
-  uid           String         @unique @db.VarChar(255)
-  image_URL     String?        @db.Text
-  agreement_URL String?        @db.Text
-  card_URL      String?        @db.Text
-  pp7_URL       String?        @db.Text
-  pp1_URL       String?        @db.Text
-  register_data register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
+  uid            String         @unique @db.VarChar(255)
+  image_URL      String?        @db.Text
+  image_Name     String?        @db.Text
+  agreement_URL  String?        @db.Text
+  agreement_Name String?        @db.Text
+  card_URL       String?        @db.Text
+  card_Name      String?        @db.Text
+  pp7_URL        String?        @db.Text
+  pp7_Name       String?        @db.Text
+  pp1_URL        String?        @db.Text
+  pp1_Name       String?        @db.Text
+  register_data  register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
   @@index([uid], map: "uid")
 }
