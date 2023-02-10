@@ -1,6 +1,6 @@
 const userService = require("../services/user.service");
 
-/// validate submit login/submit
+// validate submit login/submit
 exports.createUser = async (req, res) => {
   try {
     const uid = req.params.uid;
@@ -12,13 +12,13 @@ exports.createUser = async (req, res) => {
       await userService.createUser(uid);
       res
         .status(201)
-        .send({ success: true, message: "Created User", accessToken: token });
+        .send({ success: true, message: "User Created", accessToken: token });
     }
     if (user) {
       // Check Form Submitted
       if (user.is_completed == true) {
         res
-          .status(401)
+          .status(503)
           .send({ success: false, message: "User Already Submitted Form" });
       } else {
         const token = userService.generateToken(uid);

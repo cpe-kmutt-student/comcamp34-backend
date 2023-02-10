@@ -42,7 +42,7 @@ model register_data {
   middlename            String?    @db.VarChar(50)
   surname               String?    @db.VarChar(50)
   nickname              String?    @db.VarChar(50)
-  birth_date            DateTime?  @db.Date
+  birth_date            String?    @db.VarChar(20)
   mobile                String?    @db.VarChar(20)
   email                 String?    @db.VarChar(50)
   province              String?    @db.VarChar(255)
