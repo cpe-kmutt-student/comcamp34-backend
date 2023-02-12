@@ -19,6 +19,8 @@ model file {
   pp7_Name       String?        @db.Text
   pp1_URL        String?        @db.Text
   pp1_Name       String?        @db.Text
+  q7_URL         String?        @db.Text
+  q7_Name        String?        @db.Text
   register_data  register_data? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "file_ibfk_1")
 
   @@index([uid], map: "uid")

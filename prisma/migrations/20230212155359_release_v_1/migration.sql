@@ -2,10 +2,17 @@
 CREATE TABLE `file` (
     `uid` VARCHAR(255) NOT NULL,
     `image_URL` TEXT NULL,
+    `image_Name` TEXT NULL,
     `agreement_URL` TEXT NULL,
+    `agreement_Name` TEXT NULL,
     `card_URL` TEXT NULL,
+    `card_Name` TEXT NULL,
     `pp7_URL` TEXT NULL,
+    `pp7_Name` TEXT NULL,
     `pp1_URL` TEXT NULL,
+    `pp1_Name` TEXT NULL,
+    `q7_URL` TEXT NULL,
+    `q7_Name` TEXT NULL,
 
     UNIQUE INDEX `file_uid_key`(`uid`),
     INDEX `uid`(`uid`)
@@ -30,12 +37,14 @@ CREATE TABLE `question` (
 CREATE TABLE `register_data` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `uid` VARCHAR(255) NULL,
+    `consent` BOOLEAN NOT NULL DEFAULT false,
+    `page` INTEGER NULL DEFAULT 0,
     `prefix` VARCHAR(50) NULL,
     `firstname` VARCHAR(50) NULL,
     `middlename` VARCHAR(50) NULL,
     `surname` VARCHAR(50) NULL,
     `nickname` VARCHAR(50) NULL,
-    `birth_date` DATE NULL,
+    `birth_date` VARCHAR(20) NULL,
     `mobile` VARCHAR(20) NULL,
     `email` VARCHAR(50) NULL,
     `province` VARCHAR(255) NULL,

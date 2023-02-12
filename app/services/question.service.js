@@ -3,6 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const Question = prisma.question;
 const User = prisma.register_data;
+const File = prisma.file;
 
 exports.updateQuestion1 = async (uid, body) => {
   await User.update({
@@ -48,6 +49,15 @@ exports.updateQuestion2 = async (uid, body) => {
       q5: body.q5,
       q6: body.q6,
       q7: body.q7,
+    },
+  });
+  await File.update({
+    where: {
+      uid: uid,
+    },
+    data: {
+      q7_Name: body.q7_Name,
+      q7_URL: body.q7_URL,
     },
   });
   return result;
