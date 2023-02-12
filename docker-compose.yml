@@ -22,9 +22,11 @@ services:
       - "3306:3306"
     volumes:
       - ./volumes/db:/var/lib/mysql
+    env_file:
+      - .env
     environment:
-      MYSQL_DATABASE: comcamp
-      MYSQL_ROOT_PASSWORD: "comcampAdminPassword"
+      MYSQL_DATABASE: $DB_USER
+      MYSQL_ROOT_PASSWORD: $DB_PASS
 
   phpmyadmin:
     image: phpmyadmin
@@ -32,7 +34,5 @@ services:
       - "7000:80"
     environment:
       PMA_HOST: mysql
-      PMA_USER: "root"
-      PMA_PASSWORD: "comcampAdminPassword"
     depends_on:
       - mysql
