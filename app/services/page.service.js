@@ -278,7 +278,6 @@ exports.updateSubmit = async (uid) => {
     res.file[0].image_URL &&
     res.file[0].pp1_URL &&
     res.file[0].pp7_URL &&
-    res.file[0].q7_URL &&
     // Question
     res.question[0].q1 &&
     res.question[0].q2 &&
