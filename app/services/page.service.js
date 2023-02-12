@@ -3,24 +3,14 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const User = prisma.register_data;
 
-const checkPage = async (uid, bodyPage) => {
-  const page = await userService.getPage(uid);
-  let currentPage = page;
-  if (bodyPage > page) {
-    currentPage = bodyPage;
-  }
-  return currentPage;
-};
-
 exports.updateConsent = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");
-  const currentPage = await checkPage(uid, 1);
   const result = await User.update({
     where: {
       uid: uid,
     },
     data: {
-      page: currentPage,
+      page: 1,
       consent: true,
     },
   });
@@ -42,13 +32,12 @@ exports.getConsent = async (uid) => {
 
 exports.updatePersonal = async (uid, body) => {
   if (!uid) throw new Error("No Uid Provide");
-  const currentPage = await checkPage(uid, 2);
   const result = await User.update({
     where: {
       uid: uid,
     },
     data: {
-      page: currentPage,
+      page: 2,
       prefix: body.prefix,
       firstname: body.firstname,
       middlename: body.middlename,
@@ -100,13 +89,12 @@ exports.getPersonal = async (uid) => {
 };
 
 exports.updateEducation = async (uid, body) => {
-  const currentPage = await checkPage(uid, 3);
   const result = await User.update({
     where: {
       uid: uid,
     },
     data: {
-      page: currentPage,
+      page: 3,
       school_name: body.school_name,
       school_province: body.school_province,
       study_plan: body.study_plan,
@@ -152,13 +140,12 @@ exports.getEducation = async (uid) => {
 };
 
 exports.updateInterest = async (uid, body) => {
-  const currentPage = await checkPage(uid, 4);
   const result = await User.update({
     where: {
       uid: uid,
     },
     data: {
-      page: currentPage,
+      page: 4,
       comcamp_previous: body.comcamp_previous,
       major_interest: body.major_interest,
       reason_major_interest: body.reason_major_interest,
@@ -192,13 +179,12 @@ exports.getInterest = async (uid) => {
 };
 
 exports.updateParentData = async (uid, body) => {
-  const currentPage = await checkPage(uid, 5);
   const result = await User.update({
     where: {
       uid: uid,
     },
     data: {
-      page: currentPage,
+      page: 5,
       parent_prefix: body.parent_prefix,
       parent_firstname: body.parent_firstname,
       parent_middlename: body.parent_middlename,
@@ -248,9 +234,9 @@ exports.getParentData = async (uid) => {
 exports.updateSubmit = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");
   const result = await User.findUnique({
-    where: {
+    where: { 
       uid: uid,
-    },
+    }, 
   });
   console.log(result);
   return result;

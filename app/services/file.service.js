@@ -4,22 +4,13 @@ const prisma = new PrismaClient();
 const File = prisma.file;
 const User = prisma.register_data;
 
-const checkPage = async (uid, bodyPage) => {
-  const page = await userService.getPage(uid);
-  let currentPage = page;
-  if (bodyPage > page) {
-    currentPage = bodyPage;
-  }
-  return currentPage;
-};
 
 exports.updateUploadFile = async (uid, body) => {
-  const currentPage = await checkPage(uid, 6);
   await User.update({
     where: {
       uid: uid,
     },
-    data: { page: currentPage },
+    data: { page: 5 },
   });
   const result = await File.update({
     where: {

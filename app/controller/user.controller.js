@@ -12,7 +12,12 @@ exports.createUser = async (req, res) => {
       await userService.createUser(uid);
       res
         .status(201)
-        .send({ success: true, message: "User Created", accessToken: token });
+        .send({
+          success: true,
+          message: "User Created",
+          page: 0,
+          accessToken: token,
+        });
     }
     if (user) {
       // Check Form Submitted
@@ -32,7 +37,7 @@ exports.createUser = async (req, res) => {
       }
     }
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     res.status(500).send({ success: false, message: err });
   }
 };
