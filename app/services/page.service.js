@@ -242,61 +242,66 @@ exports.updateSubmit = async (uid) => {
       question: true,
     },
   });
-  if (
-    // Personal
-    res.prefix.length &&
-    res.firstname &&
-    res.surname &&
-    res.nickname &&
-    res.birth_date &&
-    res.mobile &&
-    res.email &&
-    res.province &&
-    res.shirt_size &&
-    res.travelby &&
-    // Edu
-    res.school_name &&
-    res.school_province &&
-    res.student_level &&
-    res.study_plan &&
-    res.gpax &&
-    // Interest
-    res.major_interest &&
-    res.no_previous_camp &&
-    // Parent
-    res.parent_prefix &&
-    res.parent_firstname &&
-    res.parent_surname &&
-    res.parent_mobile &&
-    res.emergency_firstname &&
-    res.emergency_surname &&
-    res.emergency_relation &&
-    res.emergency_mobile &&
-    // File
-    res.file[0].agreement_URL &&
-    res.file[0].card_URL &&
-    res.file[0].image_URL &&
-    res.file[0].pp1_URL &&
-    res.file[0].pp7_URL &&
-    // Question
-    res.question[0].q1 &&
-    res.question[0].q2 &&
-    res.question[0].q3 &&
-    res.question[0].q4 &&
-    res.question[0].q5 &&
-    res.question[0].q6 &&
-    res.question[0].q7
-  ) {
-    await User.update({
-      where: {
-        uid: uid,
-      },
-      data: {
-        is_completed: true,
-      },
-    });
-    return res;
-  } else {
+  try {
+    if (
+      // Personal
+      res.prefix.length &&
+      res.firstname &&
+      res.surname &&
+      res.nickname &&
+      res.birth_date &&
+      res.mobile &&
+      res.email &&
+      res.province &&
+      res.shirt_size &&
+      res.travelby &&
+      // Edu
+      res.school_name &&
+      res.school_province &&
+      res.student_level &&
+      res.study_plan &&
+      res.gpax &&
+      // Interest
+      res.major_interest &&
+      res.no_previous_camp &&
+      // Parent
+      res.parent_prefix &&
+      res.parent_firstname &&
+      res.parent_surname &&
+      res.parent_mobile &&
+      res.emergency_firstname &&
+      res.emergency_surname &&
+      res.emergency_relation &&
+      res.emergency_mobile &&
+      // File
+      res.file[0].agreement_URL &&
+      res.file[0].card_URL &&
+      res.file[0].image_URL &&
+      res.file[0].pp1_URL &&
+      res.file[0].pp7_URL &&
+      // Question
+      res.question[0].q1 &&
+      res.question[0].q2 &&
+      res.question[0].q3 &&
+      res.question[0].q4 &&
+      res.question[0].q5 &&
+      res.question[0].q6 &&
+      res.question[0].q7
+    ) {
+      await User.update({
+        where: {
+          uid: uid,
+        },
+        data: {
+          is_completed: true,
+        },
+      });
+      return res;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
     return false;
   }
 };

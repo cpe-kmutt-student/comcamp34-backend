@@ -5,6 +5,18 @@ const jwt = require("jsonwebtoken");
 const User = prisma.register_data;
 const File = prisma.file;
 const Question = prisma.question;
+const admin = require("firebase-admin");
+
+exports.validateIDToken = async (idToken) => {
+  if (!idToken) throw new Error("No id-token ");
+  // Firebase Validate Token
+  try {
+    const result = await admin.auth().verifyIdToken(idToken);
+    return result.uid;
+  } catch (error) {
+    throw new Error("Validate Token Error");
+  }
+};
 
 exports.getUserByUid = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");

@@ -2,11 +2,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const admin = require("firebase-admin");
+
+// Initial Firebase Admin
+admin.initializeApp({
+  credential: admin.credential.cert(require("./comcamp-34-secret.json")),
+});
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(function (req, res, next) {
+app.use(function (req, res, next) { 
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",

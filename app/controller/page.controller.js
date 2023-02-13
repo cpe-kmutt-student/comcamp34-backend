@@ -1,9 +1,7 @@
 const pageService = require("../services/page.service");
 
-exports.testPage = (req, res) => {
-  const id = req.uid;
-  // console.log(id);
-  res.status(200).send("test Pages");
+exports.testPage = async (req, res) => {
+  res.status(200).send("Test Page");
 };
 exports.updateConsent = async (req, res) => {
   try {
