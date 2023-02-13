@@ -5,10 +5,12 @@ exports.createUser = async (req, res) => {
   try {
     // idToken from headers
     const idToken = req.headers["id-token"];
-    if (!idToken) throw new Error("Please Provide id-token ");
+    if (!idToken) {
+      res.status(403).send("No id-token Provide ");
+    }
 
     const uid = await userService.validateIDToken(idToken);
-    
+
     const user = await userService.getUserByUid(uid);
 
     // Create User
