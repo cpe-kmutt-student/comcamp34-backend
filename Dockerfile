@@ -1,6 +1,9 @@
 FROM node:16-alpine
 # ENV NODE_ENV=production
 WORKDIR /usr/src/app
+# Set timezone
+RUN apk add tzdata
+ENV TZ Asia/Bangkok
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 # generated prisma files
 COPY prisma ./prisma/
