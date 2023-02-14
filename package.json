@@ -14,6 +14,7 @@
     "@prisma/client": "^4.9.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "discord-webhook-node": "^1.1.8",
     "express": "^4.18.2",
     "firebase-admin": "^11.5.0",
     "jsonwebtoken": "^9.0.0",

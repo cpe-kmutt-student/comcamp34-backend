@@ -1,5 +1,6 @@
 const userService = require("../services/user.service");
 const { PrismaClient } = require("@prisma/client");
+const { Webhook } = require("discord-webhook-node");
 const prisma = new PrismaClient();
 const User = prisma.register_data;
 
@@ -288,12 +289,14 @@ exports.updateSubmit = async (uid) => {
       res.question[0].q6 &&
       res.question[0].q7
     ) {
+      const _toISOString = new Date().toISOString();
       await User.update({
         where: {
           uid: uid,
         },
         data: {
           is_completed: true,
+          submited_at: _toISOString,
         },
       });
       return res;
@@ -304,4 +307,28 @@ exports.updateSubmit = async (uid) => {
     console.log(error);
     return false;
   }
+};
+
+exports.sendDiscordHook = async (data, count) => {
+  if (!process.env.webHook) throw new Error("Forget to set env webHook");
+  const hook = new Webhook({ url: process.env.webHook, throwErrors: true });
+  const botProfile =
+    "https://user-images.githubusercontent.com/83873103/218687993-a62d6895-672b-47bd-8440-e01b88a8a4e8.jpg";
+  hook.setUsername("Kabigon.exe");
+  hook.setAvatar(botProfile);
+  const userName = data.nickname || "USER";
+  //Sends a success message
+  hook.success(
+    "**[Comcamp34 Registration]**",
+    `น้อง **${userName}** ได้สมัครเข้ามาแล้ว 🎉`,
+    `เป็นลำดับที่ **${count}**`
+  );
+};
+exports.countSubmitted = async () => {
+  const count = await User.count({
+    where: {
+      is_completed: true,
+    },
+  });
+  return count;
 };

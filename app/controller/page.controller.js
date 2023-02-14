@@ -113,6 +113,9 @@ exports.submit = async (req, res) => {
     const uid = req.uid;
     const result = await pageService.updateSubmit(uid);
     if (result) {
+      const count = await pageService.countSubmitted();
+      pageService.sendDiscordHook(result, count);
+      // console.log(count);
       res.status(200).send({ success: true, data: result });
     } else {
       res.status(405).send({ success: false, message: "User not valid Form" });
