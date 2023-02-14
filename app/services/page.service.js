@@ -264,7 +264,7 @@ exports.updateSubmit = async (uid) => {
       res.gpax &&
       // Interest
       res.major_interest &&
-      res.no_previous_camp &&
+      // res.no_previous_camp &&
       // Parent
       res.parent_prefix &&
       res.parent_firstname &&
