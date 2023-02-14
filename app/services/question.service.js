@@ -10,7 +10,7 @@ exports.updateQuestion1 = async (uid, body) => {
     where: {
       uid: uid,
     },
-    data: { page: 7 },
+    data: { page: 6 },
   });
   const result = await Question.update({
     where: {

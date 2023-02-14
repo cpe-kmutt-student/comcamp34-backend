@@ -38,7 +38,7 @@ exports.updatePersonal = async (uid, body) => {
       uid: uid,
     },
     data: {
-      page: 2,
+      page: 1,
       prefix: body.prefix,
       firstname: body.firstname,
       middlename: body.middlename,
@@ -95,7 +95,7 @@ exports.updateEducation = async (uid, body) => {
       uid: uid,
     },
     data: {
-      page: 3,
+      page: 2,
       school_name: body.school_name,
       school_province: body.school_province,
       study_plan: body.study_plan,
@@ -146,7 +146,7 @@ exports.updateInterest = async (uid, body) => {
       uid: uid,
     },
     data: {
-      page: 4,
+      page: 3,
       comcamp_previous: body.comcamp_previous,
       major_interest: body.major_interest,
       reason_major_interest: body.reason_major_interest,
@@ -185,7 +185,7 @@ exports.updateParentData = async (uid, body) => {
       uid: uid,
     },
     data: {
-      page: 5,
+      page: 4,
       parent_prefix: body.parent_prefix,
       parent_firstname: body.parent_firstname,
       parent_middlename: body.parent_middlename,
