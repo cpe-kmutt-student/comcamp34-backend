@@ -4,4 +4,4 @@ const User = prisma.register_data;
 const File = prisma.file;
 const Question = prisma.question;
 
-export default User
+export default User;
