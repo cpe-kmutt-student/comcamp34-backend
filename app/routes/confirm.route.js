@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const confirmController = require("../controller/confirm.controller");
 
-router.route("/confirm").get(confirmController.x);
-
+router.route("/confirm").post(confirmController.result);
+router.route("/confirm/checker").post(confirmController.whitelistChecker);
 // Consent
 router
   .route("/confirm/1")
