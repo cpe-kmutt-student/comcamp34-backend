@@ -46,3 +46,33 @@ exports.createUser = async (req, res) => {
     res.status(500).send({ success: false, message: err });
   }
 };
+
+exports.login = async (req, res) => {
+  try {
+    // idToken from headers
+    const idToken = req.headers["id-token"];
+    if (!idToken) {
+      res.status(403).send("No id-token Provide ");
+    }
+
+    const uid = await userService.validateIDToken(idToken);
+
+    const user = await userService.getUserByUid(uid);
+    if (user) {
+      const token = userService.generateToken(uid);
+      // const page = await userService.getPage(uid);
+      res.status(200).send({
+        success: true,
+        message: "Authenthicated",
+        // page: page,
+        accessToken: token,
+      });
+    } else {
+      res.status(404).send("User Not Found");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ success: false, message: err });
+  }
+};
+
