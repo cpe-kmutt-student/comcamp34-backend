@@ -7,37 +7,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Whitelist {
+  uid          String        @unique @db.VarChar(255)
+  Confirmation Confirmation?
+  Examination  Examination?
+}
+
 model Confirmation {
-  uid                 String  @unique @db.VarChar(255)
-  isConfirm           Boolean @default(true)
-  shirt_size          String? @db.VarChar(16)
-  describeTravel      String? @db.Text
-  describeBackhome    String? @db.Text
-  transaction_Name    String? @db.Text
-  transaction_URL     String? @db.Text
-  transaction_date    String? @db.VarChar(20)
-  transaction_hours   String? @db.VarChar(4)
-  transaction_minutes String? @db.VarChar(4)
+  uid                 String     @unique @db.VarChar(255)
+  isConfirm           Boolean    @default(true)
+  shirt_size          String?    @db.VarChar(16)
+  describeTravel      String?    @db.Text
+  describeBackhome    String?    @db.Text
+  transaction_Name    String?    @db.Text
+  transaction_URL     String?    @db.Text
+  transaction_date    String?    @db.VarChar(20)
+  transaction_hours   String?    @db.VarChar(4)
+  transaction_minutes String?    @db.VarChar(4)
+  is_completed        Boolean?   @default(false)
+  submited_at         DateTime?
+  Whitelist           Whitelist? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "Confirmation_ibfk_1")
+
+  @@index([uid], map: "uid")
 }
 
 model Examination {
-  uid         String  @unique @db.VarChar(255)
-  q1_1        String? @db.VarChar(4)
-  reason_q1_1 String? @db.Text
-  q1_2        String? @db.VarChar(4)
-  reason_q1_2 String? @db.Text
-  q1_3        String? @db.VarChar(4)
-  reason_q1_3 String? @db.Text
-  q2_1        String? @db.VarChar(4)
-  q2_2        String? @db.VarChar(4)
-  q2_3        String? @db.VarChar(4)
-  q3_1        String? @db.VarChar(255)
-  q3_2        String? @db.VarChar(255)
-  q4_1        String? @db.VarChar(255)
-  q4_2        String? @db.VarChar(255)
-  q5_1        String? @db.VarChar(4)
-  q5_2        String? @db.VarChar(4)
-  q5_3        String? @db.VarChar(4)
+  uid         String     @unique @db.VarChar(255)
+  q1_1        String?    @db.VarChar(4)
+  reason_q1_1 String?    @db.Text
+  q1_2        String?    @db.VarChar(4)
+  reason_q1_2 String?    @db.Text
+  q1_3        String?    @db.VarChar(4)
+  reason_q1_3 String?    @db.Text
+  q2_1        String?    @db.VarChar(4)
+  q2_2        String?    @db.VarChar(4)
+  q2_3        String?    @db.VarChar(4)
+  q3_1        String?    @db.VarChar(255)
+  q3_2        String?    @db.VarChar(255)
+  q4_1        String?    @db.VarChar(255)
+  q4_2        String?    @db.VarChar(255)
+  q5_1        String?    @db.VarChar(4)
+  q5_2        String?    @db.VarChar(4)
+  q5_3        String?    @db.VarChar(4)
+  Whitelist   Whitelist? @relation(fields: [uid], references: [uid], onDelete: Restrict, onUpdate: Restrict, map: "Examination_ibfk_1")
 }
 
 model file {
