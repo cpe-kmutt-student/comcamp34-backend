@@ -15,7 +15,7 @@ model whitelist {
 
 model confirmation {
   uid                 String     @unique @db.VarChar(255)
-  isConfirm           Boolean    @default(true)
+  isConfirm           String?    @db.VarChar(2)
   shirt_size          String?    @db.VarChar(16)
   describeTravel      String?    @db.Text
   describeBackhome    String?    @db.Text

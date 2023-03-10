@@ -9,7 +9,7 @@ exports.whitelistChecker = async (req, res) => {
     const uid = req.uid;
     const result = await confirmService.whitelistChecker(uid);
     const result2 = await confirmService.tableCreateChecker(uid);
-    if(result !== null && result2 === null){
+    if(result && !result2){
      await confirmService.createData(uid);
     }
     res.status(200).send({ success: true, data : result });

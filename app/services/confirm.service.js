@@ -6,12 +6,26 @@ const Confirmation = prisma.confirmation;
 
 exports.whitelistChecker = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");
-  const result = await Whitelist.findUnique({
+  const result =await Whitelist.findUnique({
     where: {
       uid: uid,
     },
     select: {
       uid: true,
+    },
+  });
+
+  return result;
+};
+
+exports.isSubmit = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const result = await Confirmation.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      is_completed: true,
     },
   });
   return result;
@@ -45,7 +59,7 @@ exports.createData = async (uid) => {
 };
 
 exports.updateConfirmation = async (uid, body) => {
-  const result = await Confirm.update({
+  const result = await Confirmation.update({
     where: {
       uid: uid,
     },
@@ -65,7 +79,7 @@ exports.updateConfirmation = async (uid, body) => {
 };
 
 exports.getConfirmation = async (uid) => {
-  const result = await Confirm.findUnique({
+  const result = await Confirmation.findUnique({
     where: {
       uid: uid,
     },
@@ -79,6 +93,7 @@ exports.getConfirmation = async (uid) => {
       transaction_date: true,
       transaction_hours: true,
       transaction_minutes: true,
+      is_completed:true,
     },
   });
   return result;
