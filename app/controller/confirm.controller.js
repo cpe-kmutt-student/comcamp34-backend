@@ -166,8 +166,7 @@ exports.submit = async (req, res) => {
     const result = await confirmService.updateSubmit(uid);
     if (result) {
       const count = await confirmService.countSubmitted();
-      confirmService.sendDiscordHook(result, count);
-      // console.log(count);
+      confirmService.sendDiscordHook(uid,result, count);
       res.status(200).send({ success: true, data: result });
     } else {
       res.status(405).send({ success: false, message: "User not valid Form" });

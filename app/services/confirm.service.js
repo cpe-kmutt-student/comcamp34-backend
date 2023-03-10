@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { Webhook } = require("discord-webhook-node");
 const prisma = new PrismaClient();
 const Whitelist = prisma.whitelist;
 const Examination = prisma.examination;
@@ -254,7 +255,7 @@ exports.updateSubmit = async (uid) => {
   });
   try {
     // if not confirm
-    if (res.isConfirm === false) {
+    if (res.confirmation.isConfirm === '0') {
       const _toISOString = new Date().toISOString();
       await Confirmation.update({
         where: {
@@ -267,10 +268,10 @@ exports.updateSubmit = async (uid) => {
       });
       return res;
     } else if (
-      res.isConfirm === true &&
-      res.shirt_size &&
-      res.describeTravel &&
-      res.describeBackhome &&
+      res.confirmation.isConfirm === '1' &&
+      res.confirmation.shirt_size &&
+      res.confirmation.describeTravel &&
+      res.confirmation.describeBackhome &&
       res.examination.q1_1 &&
       res.examination.q1_2 &&
       res.examination.q1_3 &&
@@ -305,18 +306,25 @@ exports.updateSubmit = async (uid) => {
   }
 };
 
-exports.sendDiscordHook = async (data,count) => {
+exports.sendDiscordHook = async (uid,data,count) => {
   if (!process.env.webHook) throw new Error("Forget to set env webHook");
   const hook = new Webhook({ url: process.env.webHook, throwErrors: true });
   const botProfile =
     "https://user-images.githubusercontent.com/83873103/224265495-b5dec606-d1ad-4899-a1d2-36e17982123a.png";
   hook.setUsername("Snorlax.tsx");
   hook.setAvatar(botProfile);
-  const userName = data.nickname || "USER";
+  const userName = await prisma.register_data.findUnique({
+    where:{
+      uid : uid,
+    },
+    select : {
+      nickname : true,
+    }
+  }) || "USER" ;
   //Sends a success message
   hook.success(
     "**[Comcamp34 Confirmation]**",
-    `น้อง **${userName}** ได้ทำการยืนยันสิทธิ์มาแล้ว ✨`,
+    `น้อง **${userName.nickname}** ได้ทำการยืนยันสิทธิ์มาแล้ว ✨`,
     `เป็นลำดับที่ **${count}**`
   );
 };
