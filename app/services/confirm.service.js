@@ -1,6 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const Whitelist = prisma.whitelist;
+const Examination = prisma.examination;
+const Confirmation = prisma.confirmation;
 
 exports.whitelistChecker = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");
@@ -13,6 +15,33 @@ exports.whitelistChecker = async (uid) => {
     },
   });
   return result;
+};
+
+exports.tableCreateChecker = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const result = await Confirmation.findUnique({
+    where: {
+      uid: uid,
+    },
+    select: {
+      uid: true,
+    },
+  });
+  return result;
+};
+
+exports.createData = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  await Confirmation.create({
+    data: {
+      uid: uid,
+    },
+  });
+  await Examination.create({
+    data: {
+      uid: uid,
+    },
+  });
 };
 
 exports.updateConfirmation = async (uid, body) => {

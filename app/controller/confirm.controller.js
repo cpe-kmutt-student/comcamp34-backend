@@ -5,11 +5,13 @@ exports.result = async (req, res) => {
 };
 
 exports.whitelistChecker = async (req, res) => {
-  console.log(req.uid);
   try {
     const uid = req.uid;
-    console.log(req.uid);
     const result = await confirmService.whitelistChecker(uid);
+    const result2 = await confirmService.tableCreateChecker(uid);
+    if(result !== null && result2 === null){
+     await confirmService.createData(uid);
+    }
     res.status(200).send({ success: true, data : result });
   } catch (error) {
     console.log(error);
