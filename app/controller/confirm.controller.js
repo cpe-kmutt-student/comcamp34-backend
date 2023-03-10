@@ -42,6 +42,124 @@ exports.getConfirmation = async (req, res) => {
   }
 };
 
+exports.updateExamination1 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const body = req.body;
+    const result = await confirmService.updateExamination1(uid, body);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.getExamination1 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await confirmService.getExamination1(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.updateExamination2 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const body = req.body;
+    const result = await confirmService.updateExamination2(uid, body);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.getExamination2 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await confirmService.getExamination2(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.updateExamination3 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const body = req.body;
+    const result = await confirmService.updateExamination3(uid, body);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.getExamination3 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await confirmService.getExamination3(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.updateExamination4 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const body = req.body;
+    const result = await confirmService.updateExamination1(uid, body);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.getExamination4 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await confirmService.getExamination4(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.updateExamination5 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const body = req.body;
+    const result = await confirmService.updateExamination5(uid, body);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+exports.getExamination5 = async (req, res) => {
+  try {
+    const uid = req.uid;
+    const result = await confirmService.getExamination5(uid);
+    res.status(200).send({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+
+
+
 exports.submit = async (req, res) => {
   try {
   } catch (error) {
