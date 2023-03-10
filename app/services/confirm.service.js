@@ -6,7 +6,7 @@ const Confirmation = prisma.confirmation;
 
 exports.whitelistChecker = async (uid) => {
   if (!uid) throw new Error("No Uid Provide");
-  const result =await Whitelist.findUnique({
+  const result = await Whitelist.findUnique({
     where: {
       uid: uid,
     },
@@ -71,7 +71,7 @@ exports.updateConfirmation = async (uid, body) => {
       transaction_Name: body.transaction_Name,
       transaction_URL: body.transaction_URL,
       transaction_date: body.transaction_date,
-      transaction_hours: body.updateConfirmation,
+      transaction_hours: body.transaction_hours,
       transaction_minutes: body.transaction_minutes,
     },
   });
@@ -93,7 +93,7 @@ exports.getConfirmation = async (uid) => {
       transaction_date: true,
       transaction_hours: true,
       transaction_minutes: true,
-      is_completed:true,
+      is_completed: true,
     },
   });
   return result;
@@ -239,4 +239,93 @@ exports.getExamination5 = async (uid) => {
     },
   });
   return result;
+};
+
+exports.updateSubmit = async (uid) => {
+  if (!uid) throw new Error("No Uid Provide");
+  const res = await Whitelist.findUnique({
+    where: {
+      uid: uid,
+    },
+    include: {
+      examination: true,
+      confirmation: true,
+    },
+  });
+  try {
+    // if not confirm
+    if (res.isConfirm === false) {
+      const _toISOString = new Date().toISOString();
+      await Confirmation.update({
+        where: {
+          uid: uid,
+        },
+        data: {
+          is_completed: true,
+          submited_at: _toISOString,
+        },
+      });
+      return res;
+    } else if (
+      res.isConfirm === true &&
+      res.shirt_size &&
+      res.describeTravel &&
+      res.describeBackhome &&
+      res.examination.q1_1 &&
+      res.examination.q1_2 &&
+      res.examination.q1_3 &&
+      res.examination.q2_1 &&
+      res.examination.q2_2 &&
+      res.examination.q2_3 &&
+      res.examination.q3_1 &&
+      res.examination.q3_2 &&
+      res.examination.q4_1 &&
+      res.examination.q4_2 &&
+      res.examination.q5_1 &&
+      res.examination.q5_2 &&
+      res.examination.q5_3 
+      ) {
+      const _toISOString = new Date().toISOString();
+      await Confirmation.update({
+        where: {
+          uid: uid,
+        },
+        data: {
+          is_completed: true,
+          submited_at: _toISOString,
+        },
+      });
+      return res;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+exports.sendDiscordHook = async (data,count) => {
+  if (!process.env.webHook) throw new Error("Forget to set env webHook");
+  const hook = new Webhook({ url: process.env.webHook, throwErrors: true });
+  const botProfile =
+    "https://user-images.githubusercontent.com/83873103/224265495-b5dec606-d1ad-4899-a1d2-36e17982123a.png";
+  hook.setUsername("Snorlax.tsx");
+  hook.setAvatar(botProfile);
+  const userName = data.nickname || "USER";
+  //Sends a success message
+  hook.success(
+    "**[Comcamp34 Confirmation]**",
+    `น้อง **${userName}** ได้ทำการยืนยันสิทธิ์มาแล้ว ✨`,
+    `เป็นลำดับที่ **${count}**`
+  );
+};
+
+exports.countSubmitted = async () => {
+  const count = await Confirmation.count({
+    where: {
+      is_completed: true,
+    },
+  });
+  return count;
 };
