@@ -40,7 +40,7 @@ webHook = https://discord.com/api/webhooks/<>/<>
 
 <div align="center">
 
-| <a href="http://github.com/Thanaphol47825"><img src="https://avatars.githubusercontent.com/u/62344250?v=4" width="100px;">Thanaphol</a> | <a href="http://github.com/ChaiyapatOam"><img src="https://avatars.githubusercontent.com/u/83873103?v=4" width="100px;"/>Chaiyapatoam | <a href="http://github.com/sokungz01"><img src="https://avatars.githubusercontent.com/u/55968068?v=4" width="100px;" />Panurut</a> | <a href="http://github.com/SSSboom"><img src="https://avatars.githubusercontent.com/u/89514365?v=4" width="100px;">Chanapat</a> |
+| <a href="http://github.com/Thanaphol47825"><img src="https://avatars.githubusercontent.com/u/62344250?v=4" width="100px;"><br> Thanaphol</a> | <a href="http://github.com/ChaiyapatOam"><img src="https://avatars.githubusercontent.com/u/83873103?v=4" width="100px;"/> <br> Chaiyapatoam | <a href="http://github.com/sokungz01"><img src="https://avatars.githubusercontent.com/u/55968068?v=4" width="100px;" /> <br> Panurut</a> | <a href="http://github.com/SSSboom"><img src="https://avatars.githubusercontent.com/u/89514365?v=4" width="100px;"> <br> Chanapat</a> |
 | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 
 </div>
